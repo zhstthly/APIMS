@@ -1,0 +1,86 @@
+﻿@using GMS.Domian.APIMS.Entities
+@model IList<APIItem>
+@{ 
+    Layout = null;
+    var name = ViewData["ClassificationName"] ?? "API列表";
+    var description = ViewData["ClassificationDescription"] ?? "";
+}
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h2 class="panel-title">
+            <a id="APIListName" class="collapseHead" data-toggle="collapse" href="#APIListul">
+                @name
+            </a>
+            <label style="font-size:14px" id="APIListDescription">
+                @description
+            </label>
+        </h2>
+    </div>
+    <div class="panel-body">
+        <table id="APIListul" class="panel-collapse collapse in">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="width:50px">
+                        <label class="label" style="background:@GMS.WebUI.Infrastructure.HtmlHelper.GetAPITypeColorByID(item.TypeID)">
+                            @GMS.WebUI.Infrastructure.HtmlHelper.GetAPITypeNameByID(item.TypeID)
+                        </label>
+                    </td>
+                    <td style="min-width:150px;">
+                        <a class="apiListli" href="#">
+                            <input type="hidden" value="@item.ID" />
+                            @item.Name
+                        </a>
+                    </td>
+                    <td width="1000">
+                        <label>@item.Description</label>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h2 class="panel-title">
+            <a class="collapseHead" data-toggle="collapse" href="#InputParamtable">
+                入参
+            </a>
+        </h2>
+    </div>
+    <div id="inputParam" class="panel-body">
+    </div>
+</div>
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h2 class="panel-title">
+            <a class="collapseHead" data-toggle="collapse" href="#Resulttable">
+                返回结果
+            </a>
+        </h2>
+    </div>
+    <div id="result" class="panel-body">
+    </div>
+</div>
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h2 class="panel-title">
+            <a class="collapseHead" data-toggle="collapse" href="#Demodiv">
+                调试
+            </a>
+        </h2>
+    </div>
+    <div id="demo" class="panel-body">
+    </div>
+</div>
+
+<script>
+    $('.apiListli').click(function () {
+        tableTrClickNoHead($(this).parent().parent());
+        var data = { itemID: $(this).find('input').val() };
+        LoadAjax('#inputParam', '@Url.Action("InputParams")', data);
+        LoadAjax('#result', '@Url.Action("Result")', data);
+        LoadAjax('#demo', '@Url.Action("Demo")', data);
+    })
+</script>

@@ -1,0 +1,192 @@
+﻿@using GMS.Domian.APIMS.Entities
+@using GMS.WebUI.Infrastructure
+@model IEnumerable<CustomerClass>
+@{
+    Layout = null;
+}
+
+<script>
+    $(function () {
+        $('#customerClassAdd').click(function () {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("AddCustomerClass")',
+                data: { classificationID: $('#classificationID').val() },
+                success: function (result) {
+                    if (result.IsSuccess){
+                        //新增一行
+                        var $newRow = $('<tr onclick="customerClassTableTrClick($(this))"></tr>');
+                        var $rowID = $('<td hidden="hidden"><input type="hidden" name="ID" value="' + result.Data.ID+'" /></td>');
+                        var $rowName = $('<td><input type="text" class="form-control" name="Name" value="'+result.Data.Name+'"</td>');
+                        var $rowDescription = $('<td><input type="text" class="form-control" name="Description" value="' + result.Data.Description + '"</td>');
+
+                        $newRow.append($rowID);
+                        $newRow.append($rowName);
+                        $newRow.append($rowDescription);
+                        $('#customerClassTable').append($newRow);
+                        tableTrClick($newRow);
+                        $('#customerClassEdit').html("保存");
+                        $selectedRow = $newRow;
+                        ShowSuccessMessage(result.Message);
+                    }
+                    else {
+                        ShowErrorMessage(result.Message);
+                    }
+                }
+            });
+        });
+        $('#customerClassEdit').click(function () {
+            var children = $selectedRow.children();
+            if ($('#customerClassEdit').html() == '编辑') {
+                $selectedRow.removeClass("readonly");
+                children.eq(1).find('input').removeAttr("readonly");
+                children.eq(2).find('input').removeAttr("readonly");
+                $('#customerClassEdit').html("保存");
+            } else {
+                var id = children.eq(0).find('input').val();
+                var name = children.eq(1).find('input').val();
+                var description = children.eq(2).find('input').val();
+                var classificationID = $('#classificationID').val();
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("SaveCustomerClass")',
+                    data: { ID: id, Name: name, Description: description, ClassificationID: classificationID,Type:1},
+                    async:false,
+                    success: function (result) {
+                        if (result.IsSuccess){
+                            ShowSuccessMessage(result.Message);
+                        }
+                        else {
+                            ShowErrorMessage(result.Message);
+                        }
+                    }
+                });
+                $selectedRow.addClass("readonly");
+                children.eq(1).find('input').attr("readonly", true);
+                children.eq(2).find('input').attr("readonly", true);
+                $('#customerClassEdit').html("编辑");
+            }
+        });
+
+        $('#customerClassDelete').click(function () {
+            if (!$selectedRow)
+                return;
+            var children = $selectedRow.children();
+            var id = children.eq(0).find('input').val();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("DeleteCustomerClass")',
+                data: { customerClassID:id},
+                success: function (result) {
+                    if (result.IsSuccess){
+                        //删除当前行
+                        $selectedRow.remove();
+                        $selectedRow = false;
+                        $('#classProperty').html('');
+                        ShowSuccessMessage(result.Message);
+                    }
+                    else {
+                        ShowErrorMessage(result.Message);
+                    }
+                }
+            });
+        });
+
+
+        $('#customerClassSetCommon').click(function () {
+            if (!$selectedRow)
+                return;
+            var children = $selectedRow.children();
+            var id = children.eq(0).find('input').val();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("SetCommonCustomerClass")',
+                data: { customerClassID:id},
+                success: function (result) {
+                    if (result.IsSuccess){
+                        //删除当前行
+                        $selectedRow.remove();
+                        $selectedRow = false;
+                        //通用里添加一个超链
+                        var $newAction = $('<a href="#"' + id+'>' + children.eq(1).find('input').val() +'</a>');
+                        $('#commonType').append($newAction);
+                        ShowSuccessMessage(result.Message);
+                    }
+                    else {
+                        ShowErrorMessage(result.Message);
+                    }
+                }
+            });
+        });
+
+    });
+
+    var $selectedRow;
+    function customerClassTableTrClick(sender) {
+        tableTrClick($(sender));
+        $selectedRow = $(sender);
+        if ($(sender).hasClass("readonly")) {
+            $('#customerClassEdit').html("编辑");
+        }
+        else {
+            $('#customerClassEdit').html("保存");
+        }
+        var id = { id: $selectedRow.eq(0).find('input').val() };
+        LoadAjax('#classProperty', '@Url.Action("ClassProperty")', id);
+    };
+</script>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2>通用类型</h2>
+    </div>
+    <div id="commonType" class="panel-body">
+        @foreach(var item in GMS.WebUI.Infrastructure.HtmlHelper.GetCommonClassTypes())
+        {
+            <a href="#@item.Key">@item.Value</a>
+        }
+    </div>
+</div>
+<div>
+    <div class="panel panel-default" style="float:left;width:40%">
+        <div class="panel-heading">
+            <h2>自定义类</h2>
+            <input id="classificationID" type="hidden" value="@ViewData["classificationID"]" />
+        </div>
+        <div class="panel-body">
+            <button id="customerClassAdd" class="btn btn-success" >添加</button>
+            <button id="customerClassEdit" class="btn btn-info">编辑</button>
+            <button id="customerClassDelete" class="btn btn-danger">删除</button>
+            <button id="customerClassSetCommon" class="btn btn-primary">设为通用</button>
+            <table id="customerClassTable" class="table table-striped table-condensed table-bordered">
+                <tr>
+                    @foreach (var name in ClassHelper.GetDisplayNames(typeof(CustomerClass)))
+                    {
+                        <th>@name</th>
+                    }
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr class="readonly" onclick="customerClassTableTrClick($(this))">
+                        <td hidden="hidden">
+                            <input type="hidden" name="ID" value="@item.ID" />
+                        </td>
+                        <td>
+                            <input type="text" name="Name" readonly="readonly" class="form-control" value="@item.Name" />
+                        </td>
+                        <td>
+                            <input type="text" name="Description" readonly="readonly" class="form-control" value="@item.Description" />
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+    <div class="panel panel-default" style="float:left;width:60%">
+        <div class="panel-heading">
+            <h2>属性</h2>
+        </div>
+        <div id="classProperty" class="panel-body"></div>
+    </div>
+</div>

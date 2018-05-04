@@ -1,0 +1,81 @@
+﻿
+@{
+    Layout = "~/Areas/APIMS/Views/Shared/_CustomerLayout.cshtml";
+    ViewBag.Title= "API查询系统";
+}
+<!-- 客户导航 -->
+<div class="page-sidebar">
+    <ul class="nav panel-group sidebar-menu" id="nav_parent">
+        @{
+            int i = 1;
+            foreach (var item in GMS.WebUI.Cache.ConfigCache.GetSystems())
+            {
+                string collapseID = "collapse" + i++;
+                string collapseHref = "#" + collapseID;
+                <li class="panel">
+                    <a class="panel-heading collapsed" href="@collapseHref" data-toggle="collapse" data-parent="#nav_parent">
+                        <i class="menu-icon glyphicon glyphicon-tree-deciduous"></i>
+                        <span class="menu-text">@item.Value</span>
+                        <i class="glyphicon glyphicon-chevron-right menu-expand"></i>
+                    </a>
+                    <ul class="nav submenu collapse" id="@collapseID">
+                        @foreach (var classification in GMS.WebUI.Infrastructure.HtmlHelper.GetClassificationsBySystem(item.Value))
+                        {
+                            <li class="inli">
+                                <input type="hidden" value="@classification.Key" />
+                                <a class="ina" href="#">
+                                    <span onclick="click()" class="menu-icon glyphicon glyphicon-grain">
+                                        @classification.Value
+                                    </span>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </li>
+            }
+        }
+    </ul>
+</div>
+<div id="content" class="customer-content"></div>
+@section PageJS{
+    <script>
+        function customerClassClick(obj,haveValue,canEdit) {
+            clickItems.push(obj);
+            var valueJson = "";
+            if (haveValue) {
+                var valueObj = $(obj).parent().parent().find('#value');
+                if (valueObj)
+                    valueJson = valueObj.val();
+            }
+            var params = { customerClassID: $(obj).find('input').val(), value: valueJson, edit: canEdit };
+            LoadAjax('#myModal', '@Url.Action("TypeViewer", "CustomerAPIItem")', params);
+        };
+
+        $('.inli').click(function () {
+            var data = { classificationID: $(this).find('input').val() };
+            LoadAjax('#content', '@Url.Action("APIItems")', data);
+        });
+        $(function () {
+            //点击菜单箭头变化
+            $(".page-sidebar .sidebar-menu a").each(function () {
+                $(this).click(function () {
+                    var Oele = $(this).children('.menu-expand');
+                    if ($(Oele)) {
+                        if ($(Oele).hasClass('glyphicon-chevron-right')) {
+                            $(Oele).removeClass('glyphicon-chevron-right').addClass('glyphicon-chevron-down');
+                        } else {
+                            $(Oele).removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-right');
+                        }
+                    }
+
+                    //选中增加active
+                    if (!$(this).hasClass('panel-heading')) {
+                        $(".page-sidebar .sidebar-menu a").removeClass('active');
+                        $(this).addClass('active');
+                    }
+                });
+            });
+        })
+</script>
+}
+

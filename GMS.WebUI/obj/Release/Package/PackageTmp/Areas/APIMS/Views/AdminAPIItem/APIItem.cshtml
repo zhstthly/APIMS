@@ -1,0 +1,42 @@
+﻿@using Newtonsoft.Json;
+@{ 
+    Layout = null;
+}
+<script>
+    $(function () {
+        var vData =@Html.Raw(JsonConvert.SerializeObject(ViewData));
+        var selectCondition = { classificationId: vData["APIId"] };
+        createBootstrapTable(
+            '#editTable',//渲染的表格标签
+            '/AdminAPIItem/GetAPIItems?classificationId=' + vData["APIId"],//获取数据的URL
+            '/AdminAPIItem/AddAPIItem',//添加新行
+            '/AdminAPIItem/EditAPIItem',//修改数据的URL（行)
+            '/AdminAPIItem/DeleteAPIItem',//删除数据的URL（行)
+            selectCondition,//添加行需要传入的参数
+            ['ID', 'Name','TypeID', 'Visiable', 'Description'],//数据字段
+            ['ID', '名称', '类型', '可见性', '描述'],//显示字段
+            ['', '', 'select:/AdminAPIType/GetAllTypesByAjax', 'checkbox', ''],//格式化字段
+            [20,150,70,50,0],//列宽(0为自动分配宽度)
+            [false, true, true, true, true],//是否可编辑
+            true,//显示选择框
+            true,//是否单选
+            true,//是否有搜索框
+            tableClickRow
+        );
+
+        var selectedRowID;
+        function tableClickRow(row, $element) {
+            if (selectedRowID == row.ID)
+                return;
+            var replaceID = '#apiItemExtend';
+            var action = '@Url.Action("GetItem")';
+            selectedRowID = row.ID;
+            var data = { itemID: selectedRowID };
+            LoadAjax(replaceID, action, data);
+        }
+    });
+</script>
+<table id="editTable"></table>
+<HR align=center color=#987cb9 SIZE=1>
+<div id="apiItemExtend">
+</div>

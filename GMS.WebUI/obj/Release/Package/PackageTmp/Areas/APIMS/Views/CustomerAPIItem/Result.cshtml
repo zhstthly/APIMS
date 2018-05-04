@@ -1,0 +1,24 @@
+﻿@using GMS.Domian.APIMS.Entities
+@model APIItem
+@{
+    Layout = null;
+}
+
+<table id="Resulttable" class="table table-striped table-condensed table-bordered panel-collapse collapse in">
+    <tr>
+        <th width="150">名称</th>
+        <th width="100">类型</th>
+        <th width="1000">描述</th>
+    </tr>
+    <tr>
+        <td>@Model.Result.Name</td>
+        <td>
+            <a onclick="customerClassClick(this)" data-toggle="modal" data-target="#myModal" 
+               href="#@Model.Result.ClassTypeID">
+                <input type="hidden" value="@Model.Result.ClassTypeID" />
+                    @GMS.WebUI.Infrastructure.HtmlHelper.GetClassTypeName(@Model.Result.ClassTypeID)
+            </a>
+        </td>
+        <td>@Model.Result.Description</td>
+    </tr>
+</table>

@@ -1,0 +1,25 @@
+﻿@Html.Partial("SystemTree")
+@section PageJS{
+<script>
+    function doClick(event, treeId, treeNode, clickFlag) {
+        var id = treeNode.id;
+        if (id >= 0)
+        {
+            $('#classificationName').html(treeNode.name);
+            selectApiClassificationID = id;
+            var data = { classificationId: id };
+            var action = '@Url.Action("CustomerClass")';
+            var replaceID = '#cutomerClass';
+            LoadAjax(replaceID, action, data);
+        }
+}
+</script>
+}
+
+<div class="panel panel-default" style="overflow:hidden">
+    <div class="panel-heading">
+        <h2 id="classificationName"></h2>
+    </div>
+    <div id="cutomerClass" class="panel-body">
+    </div>
+</div>

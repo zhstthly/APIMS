@@ -1,0 +1,6 @@
+C:\Users\kedekfb\source\repos\GMS\GMS.Core\bin\Debug\GMS.Core.dll
+C:\Users\kedekfb\source\repos\GMS\GMS.Core\bin\Debug\GMS.Core.pdb
+C:\Users\kedekfb\source\repos\GMS\GMS.Core\obj\Debug\GMS.Core.csprojResolveAssemblyReference.cache
+C:\Users\kedekfb\source\repos\GMS\GMS.Core\obj\Debug\GMS.Core.csproj.CoreCompileInputs.cache
+C:\Users\kedekfb\source\repos\GMS\GMS.Core\obj\Debug\GMS.Core.dll
+C:\Users\kedekfb\source\repos\GMS\GMS.Core\obj\Debug\GMS.Core.pdb

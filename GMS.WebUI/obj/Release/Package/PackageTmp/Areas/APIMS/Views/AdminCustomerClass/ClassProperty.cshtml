@@ -1,0 +1,26 @@
+﻿@using GMS.Domian.APIMS.Entities
+@model CustomerClass
+@{
+        Layout = null;
+}
+<script>
+    $(function () {
+        var selectCondition = { customerClassID: @Model.ID };
+        createBootstrapTable(
+            '#editTable',//渲染的表格标签
+            '/AdminCustomerClass/GetClassProperties?customerClassID=@Model.ID',//获取数据的URL
+            '/AdminCustomerClass/AddClassProperty',//添加新行
+            '/AdminCustomerClass/EditClassProperty',//修改数据的URL（行)
+            '/AdminCustomerClass/DeleteClassProperty',//删除数据的URL（行)
+            selectCondition,//添加行需要传入的参数
+            ['Name', 'ClassTypeID', 'Length', 'DefaultValue','Description'],//数据字段
+            ['属性名', '类型', '长度', '默认值', '描述'],//显示字段
+            ['', 'select:/AdminCustomerClass/GetRelevantTypesByAjax?classificationID=@Model.ClassificationID', '', '',''],//格式化字段
+            [70,70,50,50,0],//列宽(0为自动分配宽度)
+            [true, true, true, true,true],//是否可编辑
+            true,//显示选择框
+            true//是否单选
+        );
+    });
+</script>
+<table id="editTable"></table>

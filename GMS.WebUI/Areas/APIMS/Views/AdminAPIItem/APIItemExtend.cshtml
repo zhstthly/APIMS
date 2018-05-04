@@ -1,0 +1,269 @@
+﻿@using GMS.Domian.APIMS.Entities
+@model APIItem
+@{
+    Layout = null;
+}
+<div>
+    <div><h3>入参</h3></div>
+    <table id="inputParaTable" class="table table-striped table-condensed table-bordered">
+        <tr>
+            <th width="150">名称</th>
+            <th width="50">类型</th>
+            <th width="50">必须</th>
+            <th>描述</th>
+        </tr>
+        @foreach (var item in Model.InputParameters)
+        {
+            <tr onclick="inputParaTableTrClick(this)">
+                <td hidden="hidden">@item.ID</td>
+                <td>@item.Name</td>
+                <td>@GMS.WebUI.Infrastructure.HtmlHelper.GetClassTypeName(@item.ClassTypeID)</td>
+                <td>@GMS.WebUI.Infrastructure.HtmlHelper.BoolToString(@item.IsNeed)</td>
+                <td>@item.Description</td>
+                <td hidden>@item.ClassTypeID</td>
+            </tr>
+        }
+    </table>
+    <HR align=center color=#987cb9 SIZE=1>
+    <div><h3>返回结果</h3></div>
+    <table id="resultTable" class="table table-striped table-condensed table-bordered">
+        <tr>
+            <th width="150">名称</th>
+            <th width="50">类型</th>
+            <th>描述</th>
+        </tr>
+        <tr>
+            <td hidden="hidden">@Model.Result.ID</td>
+            <td>@Model.Result.Name</td>
+            <td>@GMS.WebUI.Infrastructure.HtmlHelper.GetClassTypeName(@Model.Result.ClassTypeID)</td>
+            <td>@Model.Result.Description</td>
+            <td hidden>@Model.Result.ClassTypeID</td>
+        </tr>
+    </table>
+    <HR align=center color=#987cb9 SIZE=1>
+    <form id="inputParaForm" role="form" class="form-inline">
+        <div class="panel panel-default" style="float:left;width:50%;background-color:aqua;">
+            <div class="panel-heading">
+                <h3>入参</h3>
+            </div>
+            <div class="panel-body" style="height:150px">
+                <input type="hidden" name="ItemID" value="@Model.ID">
+                <input type="hidden" id="inputParaID" name="ID">
+                <div class="form-group">
+                    <label for="Name">名称</label>
+                    <input id="inputParaName" style="width:200px" type="text" class="form-control" name="Name" placeholder="请输入名称">
+                </div>
+                <br />
+                <div class="form-group">
+                    <label for="ClassTypeID">类型</label>
+                    @Html.DropDownList("ClassTypeID",
+                        GMS.WebUI.Infrastructure.HtmlHelper.GetPropertyTypes(Model.ClassificationID, 0),
+                        new { id = "inputParaType", style = "width:200px", placeholder = "请输入类型", @class = "form-control" })
+                </div>
+                <br />
+                <div class="form-group">
+                    <label for="Description">描述</label>
+                    <input id="inputParaDescription" style="width:200px" type="text" class="form-control" name="Description" placeholder="">
+                </div>
+                <br />
+                <div class="form-group">
+                    <label for="IsNeed">必须</label>
+                    @Html.CheckBox("IsNeed",new { id= "inputParaIsNeed",@class= "form-control" })
+                </div>
+                <br />
+            </div>
+            <div class="panel-footer">
+                <div class="form-group">
+                    <input id="paramAdd" class="form-control btn btn-success" type="button" name="add" value="新增" />
+                    <input id="paramSave" class="form-control btn btn-info" type="button" name="save" value="保存" />
+                    <input id="paramDelete" class="form-control btn btn-danger" type="button" name="delete" value="删除" />
+                </div>
+            </div>
+        </div>
+    </form>
+
+    @using (Ajax.BeginForm("SaveResult", "AdminAPIItem", new AjaxOptions
+    {
+        HttpMethod = "post",
+        InsertionMode = InsertionMode.Replace,
+        OnSuccess = "onResultSave"
+    }, new { role = "form", @class = "form-inline" }))
+    {
+        <div class="panel panel-default" style="float:left;width:50%;background-color:bisque;">
+            <div class="panel-heading">
+                <h3>返回结果</h3>
+            </div>
+            <div class="panel-body" style="height:150px">
+                <input type="hidden" name="ItemID" value="@Model.ID">
+                <input type="hidden" id="resultID" name="ID">
+                <div class="form-group">
+                    <label for="Name">名称</label>
+                    <input id="resultName" style="width:200px" type="text" class="form-control" name="Name" placeholder="请输入名称">
+                </div>
+                <br />
+                <div class="form-group">
+                    <label for="ClassTypeID">类型</label>
+                    @Html.DropDownList("ClassTypeID",
+                        GMS.WebUI.Infrastructure.HtmlHelper.GetPropertyTypes(Model.ClassificationID, 0),
+                        new { id= "resultType", placeholder = "请输入类型", style = "width:200px", @class = "form-control" })
+                </div>
+                <br />
+                <div class="form-group">
+                    <label for="Description">描述</label>
+                    <input id="resultDescription" style="width:200px" type="text" class="form-control" name="Description" placeholder="">
+                </div>
+                <br />
+            </div>
+            <div class="panel-footer">
+                <div class="form-group">
+                    <input class="form-control btn btn-info" type="submit" name="save" value="保存" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<script>
+    $(function () {
+        $('#paramAdd').click(function () {
+            $.ajax({
+                cache: true,
+                type: "POST",
+                dataType:'json',
+                url: '@Url.Action("AddInputParameter","AdminAPIItem")',
+                data: $('#inputParaForm').serialize(),
+                async: false,
+                error: function (request) {
+                    ShowErrorMessage("新增失败！");
+                },
+                success: function (result) {
+                    if (result.IsSuccess){
+                        //入参表新增一行
+                        var $newRow = $('<tr onclick="inputParaTableTrClick($(this))"></tr>');
+                        var $rowID = $('<td hidden="hidden"></td>');
+                        $rowID.html(result.Data.ID);
+                        var $rowName = $('<td></td>');
+                        $rowName.html(result.Data.Name);
+                        var $rowTypeName = $('<td></td>');
+                        $rowTypeName.html($('#inputParaType').find("option:selected").text());
+                        var $rowType = $('<td hidden="hidden"></td>');
+                        $rowType.html(result.Data.ClassTypeID);
+                        var $rowDescription = $('<td></td>');
+                        $rowDescription.html(result.Data.Description);
+                        var $rowIsNeed = $('<td></td>');
+                        if (result.Data.IsNeed)
+                            $rowIsNeed.html('是');
+                        else
+                            $rowIsNeed.html('否');
+                        $newRow.append($rowID);
+                        $newRow.append($rowName);
+                        $newRow.append($rowTypeName);
+                        $newRow.append($rowIsNeed);
+                        $newRow.append($rowDescription);
+                        $newRow.append($rowType);
+                        $('#inputParaTable').append($newRow);
+                        tableTrClick($newRow);
+                        inputParaSelectedRowIndex = $newRow.index();
+                        ShowSuccessMessage(result.Message);
+                    }
+                    else {
+                        ShowErrorMessage(result.Message);
+                    }
+
+                }
+            });
+        });
+
+        $('#paramSave').click(function () {
+            $.ajax({
+                cache: true,
+                type: "POST",
+                dataType: 'json',
+                url: '@Url.Action("SaveInputParameter","AdminAPIItem")',
+                data: $('#inputParaForm').serialize(),
+                async: false,
+                error: function (request) {
+                    ShowErrorMessage("保存失败！");
+                },
+                success: function (data) {
+                    if (data.IsSuccess) {
+                        //刷新入参表选中行
+                        var rows = $('#inputParaTable').find('tr');
+                        if (inputParaSelectedRowIndex >= 0) {
+                            var children = $(rows.eq(inputParaSelectedRowIndex)).find('td');
+                            children.eq(1).html($('#inputParaName').val());
+                            children.eq(2).html($('#inputParaType').find("option:selected").text());
+                            children.eq(4).html($('#inputParaDescription').val());
+                            children.eq(5).html($('#inputParaType').val());
+                            if ($('#inputParaIsNeed').is(':checked'))
+                                children.eq(3).html('是');
+                            else
+                                children.eq(3).html('否');
+                        }
+                    }
+                    ShowSuccessMessage(data.Message);
+                }
+            });
+        });
+
+        $('#paramDelete').click(function () {
+            $.ajax({
+                cache: true,
+                type: "POST",
+                dataType: 'json',
+                url: '@Url.Action("DeleteInputParameter","AdminAPIItem")',
+                data: $('#inputParaForm').serialize(),
+                async: false,
+                error: function (request) {
+                    ShowErrorMessage("删除失败！");
+                },
+                success: function (data) {
+                    if (data.IsSuccess) {
+                        //入参表删除一行
+                        var rows = $('#inputParaTable').find('tr');
+                        if (inputParaSelectedRowIndex > 0) {
+                            $(rows.eq(inputParaSelectedRowIndex)).remove();
+                            inputParaSelectedRowIndex = 0;
+                        }
+                    }
+                    ShowSuccessMessage(data.Message);
+                }
+            });
+        });
+    });
+
+    function onResultSave(data) {
+        ShowSuccessMessage(data.Message);
+        //刷新返回结果表的行
+        var rows = $('#resultTable').find('tr');
+        var children = $(rows.eq(1)).find('td');
+        children.eq(1).html($('#resultName').val());
+        children.eq(2).html($('#resultType').find("option:selected").text());
+        children.eq(3).html($('#resultDescription').val());
+        children.eq(4).html($('#resultType').val());
+    };
+
+    var inputParaSelectedRowIndex;
+    function inputParaTableTrClick(sender) {
+        tableTrClick($(sender));
+        inputParaSelectedRowIndex = $(sender).index();
+        var children = $(sender).children();
+        inputParaSelectedID = children.eq(0).html();
+        $('#inputParaID').val(inputParaSelectedID);
+        $('#inputParaName').val(children.eq(1).html());
+        $('#inputParaType').val(children.eq(5).html());
+        $('#inputParaDescription').val(children.eq(4).html());
+        if (children.eq(3).html() == "是")
+            $('#inputParaIsNeed').attr("checked", true);
+        else
+            $('#inputParaIsNeed').attr("checked", false);
+    };
+
+    $(function () {
+        var rows = $('#resultTable').find('tr');
+        var children = $(rows.eq(1)).find('td');
+        $('#resultID').val(children.eq(0).html());
+        $('#resultName').val(children.eq(1).html());
+        $('#resultType').val(children.eq(4).html());
+        $('#resultDescription').val(children.eq(3).html());
+    });
+</script>

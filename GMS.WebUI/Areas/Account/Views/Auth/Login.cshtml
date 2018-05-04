@@ -1,0 +1,82 @@
+﻿@model GMS.Domian.APIMS.Entities.LoginInfo
+<head>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    @{
+        ViewBag.Title = "管理员登录";
+    }
+    <style>
+        .container {
+            display: table;
+            height: 100%;
+        }
+
+        .row {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .row-centered {
+            text-align: center;
+        }
+
+        .col-centered {
+            display: inline-block;
+            float: none;
+            text-align: left;
+            margin-right: -4px;
+        }
+
+        .field-validation-error {
+            color: #f00;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row row-centered">
+            <div class="well col-md-3 col-centered">
+
+                <h2 class="text-center">管理员登录</h2>
+                @using (Html.BeginForm())
+                {
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "请输入用户名" })
+                        @Html.ValidationMessageFor(m => m.UserName)
+                    </div>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "请输入密码" })
+                                @Html.ValidationMessageFor(m => m.Password)
+                            </div>
+                            <input type="submit" class="btn btn-success btn-block" value="登录" />
+                            @Html.ValidationMessage("LoginError")
+                }
+            </div>
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-3.0.0.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script>
+        $(function () {
+            var Person = function (name, age) {
+                this.name = name||'NoName';
+                this.age = age;
+                this.type = "Person";
+                this.getName = function () {
+                    return this.name;
+                };
+            }
+
+            var Student = function (name, age, id) {
+                Person.apply(this, arguments);
+                this.id = id || 'NoId';
+            };
+
+            var person1 = new Person("jim", 10);
+            var student1 = new Student('tom',24,2);
+            console.info(person1.getName());
+            console.info(student1.getName());
+        })
+    </script>
+</body>

@@ -1,0 +1,6 @@
+C:\Users\kedekfb\source\repos\GMS\GMS.Framework\bin\Debug\GMS.Framework.dll
+C:\Users\kedekfb\source\repos\GMS\GMS.Framework\bin\Debug\GMS.Framework.pdb
+C:\Users\kedekfb\source\repos\GMS\GMS.Framework\obj\Debug\GMS.Framework.csprojResolveAssemblyReference.cache
+C:\Users\kedekfb\source\repos\GMS\GMS.Framework\obj\Debug\GMS.Framework.csproj.CoreCompileInputs.cache
+C:\Users\kedekfb\source\repos\GMS\GMS.Framework\obj\Debug\GMS.Framework.dll
+C:\Users\kedekfb\source\repos\GMS\GMS.Framework\obj\Debug\GMS.Framework.pdb

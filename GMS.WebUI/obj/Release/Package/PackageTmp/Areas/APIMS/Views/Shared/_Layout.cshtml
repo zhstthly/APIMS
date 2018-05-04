@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrapExtends/bootstrap-editable.css" rel="stylesheet" />
+    <link href="~/Content/bootstrapExtends/bootstrap-table.css" rel="stylesheet" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <link href="~/Content/bootstrap-colorpicker.css" rel="stylesheet" />
+    <link href="~/Content/zTree.theme.metro.css" rel="stylesheet" />
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrapExtends/bootstrap-confirmation.js"></script>
+    <script src="~/Scripts/bootstrapExtends/bootstrap-table.js"></script>
+    <script src="~/Scripts/bootstrapExtends/bootstrap-table-zh-CN.min.js"></script>
+    <script src="~/Scripts/bootstrapExtends/bootstrap-table-editable.js"></script>
+    <script src="~/Scripts/bootstrapExtends/bootstrap-editable.js"></script>
+    <script src="~/Scripts/cutomer/bootstrap-colorpicker.js"></script>
+    <script src="~/Scripts/jquery.ztree.all-3.5.js"></script>
+</head>
+<body>
+    <div class="container body-content">
+        @Html.Action("TopNavbar", "Admin", new { Area = "APIMS" })
+        @RenderBody()
+    </div>
+    <script src="~/Scripts/Common.js"></script>
+    @RenderSection("PageJS",required:false)
+</body>
+</html>
