@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
+﻿using System.Collections.Specialized;
 using System.Configuration;
-using System.Linq;
-using System.Web;
 using System.Xml;
 
 namespace GMS.WebUI
@@ -12,8 +8,8 @@ namespace GMS.WebUI
     {
         public MyConfigHandler()
         {
-
         }
+
         public object Create(object parent, object configContext, XmlNode section)
         {
             NameValueCollection configs;

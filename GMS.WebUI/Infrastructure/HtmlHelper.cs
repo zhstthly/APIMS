@@ -25,14 +25,15 @@ namespace GMS.WebUI.Infrastructure
             return apiTypeController.GetTypeNameByID(typeID);
         }
 
-        public static Dictionary<int,string> GetClassificationsBySystem(string systemName)
+        public static Dictionary<int, string> GetClassificationsBySystem(string systemName)
         {
             Dictionary<int, string> dic_Classification = new Dictionary<int, string>();
             var classificationController = DependencyResolver.Current.GetService<Areas.APIMS.Controllers.AdminAPIClassificationController>();
-            foreach(var item in classificationController.GetAPIClassifications2List(systemName))
+            foreach (var item in classificationController.GetAPIClassifications2List(systemName))
             {
                 dic_Classification.Add(item.ID, item.Name);
             }
+
             return dic_Classification;
         }
 
@@ -48,13 +49,13 @@ namespace GMS.WebUI.Infrastructure
             return customerClassController.GetTypeNameByID(classTypeID);
         }
 
-        public static Dictionary<int,string> GetCommonClassTypes()
+        public static Dictionary<int, string> GetCommonClassTypes()
         {
             var customerClassController = DependencyResolver.Current.GetService<Areas.APIMS.Controllers.AdminCustomerClassController>();
             return customerClassController.GetCommonClassTypes();
         }
 
-        public static List<SelectListItem> GetPropertyTypes(int customerClassID,int selectedTypeID)
+        public static List<SelectListItem> GetPropertyTypes(int customerClassID, int selectedTypeID)
         {
             var selectItemList = new List<SelectListItem>();
             var customerClassController = DependencyResolver.Current.GetService<Areas.APIMS.Controllers.AdminCustomerClassController>();
@@ -67,17 +68,21 @@ namespace GMS.WebUI.Infrastructure
                     Value = item.ID.ToString()
                 };
                 if (selectItem.Value == selectedTypeID.ToString())
+                {
                     selectItem.Selected = true;
+                }
+
                 selectItemList.Add(selectItem);
             }
+
             return selectItemList;
         }
 
         public static List<SelectListItem> GetSystemSelectItems(string selectName = null)
         {
             var selectItemList = new List<SelectListItem>();
-            Dictionary<int,string> systems = Cache.ConfigCache.GetSystems();
-            foreach(var item in systems)
+            Dictionary<int, string> systems = Cache.ConfigCache.GetSystems();
+            foreach (var item in systems)
             {
                 var selectItem = new SelectListItem
                 {
@@ -85,9 +90,13 @@ namespace GMS.WebUI.Infrastructure
                     Value = item.Value
                 };
                 if (selectItem.Value == selectName)
+                {
                     selectItem.Selected = true;
+                }
+
                 selectItemList.Add(selectItem);
             }
+
             return selectItemList;
         }
 
@@ -104,9 +113,13 @@ namespace GMS.WebUI.Infrastructure
                     Value = item.ID.ToString()
                 };
                 if (selectItem.Value == selectName.ToString())
+                {
                     selectItem.Selected = true;
+                }
+
                 apitypeList.Add(selectItem);
             }
+
             return apitypeList;
         }
 
@@ -122,9 +135,13 @@ namespace GMS.WebUI.Infrastructure
                     Value = item.Key
                 };
                 if (selectItem.Value == selectName)
+                {
                     selectItem.Selected = true;
+                }
+
                 selectItemList.Add(selectItem);
             }
+
             return selectItemList;
         }
     }

@@ -29,3 +29,14 @@ C:\Users\kedekfb\source\repos\GMS\GMS.Domian\obj\Debug\GMS.Domian.dll
 C:\Users\kedekfb\source\repos\GMS\GMS.Domian\obj\Debug\GMS.Domian.pdb
 C:\Users\kedekfb\source\repos\GMS\GMS.Domian\obj\Debug\GMS.Domian.Migrations.Initial17.resources
 C:\Users\kedekfb\source\repos\GMS\GMS.Domian\obj\Debug\GMS.Domian.Migrations.Initial18.resources
+C:\zhstthly\APIMS\GMS.Domian\bin\Debug\GMS.Domian.dll.config
+C:\zhstthly\APIMS\GMS.Domian\bin\Debug\GMS.Domian.dll
+C:\zhstthly\APIMS\GMS.Domian\bin\Debug\GMS.Domian.pdb
+C:\zhstthly\APIMS\GMS.Domian\bin\Debug\EntityFramework.dll
+C:\zhstthly\APIMS\GMS.Domian\bin\Debug\EntityFramework.SqlServer.dll
+C:\zhstthly\APIMS\GMS.Domian\bin\Debug\EntityFramework.xml
+C:\zhstthly\APIMS\GMS.Domian\bin\Debug\EntityFramework.SqlServer.xml
+C:\zhstthly\APIMS\GMS.Domian\obj\Debug\GMS.Domian.csproj.CoreCompileInputs.cache
+C:\zhstthly\APIMS\GMS.Domian\obj\Debug\GMS.Domian.csproj.CopyComplete
+C:\zhstthly\APIMS\GMS.Domian\obj\Debug\GMS.Domian.dll
+C:\zhstthly\APIMS\GMS.Domian\obj\Debug\GMS.Domian.pdb

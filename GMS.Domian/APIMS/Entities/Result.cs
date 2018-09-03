@@ -11,6 +11,7 @@ namespace GMS.Domian.APIMS.Entities
     {
         [Display(Name = "名称")]
         public string Name { get; set; }
+
         [Display(Name = "类型")]
         public int ClassTypeID { get; set; }
     }

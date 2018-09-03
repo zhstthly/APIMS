@@ -4,3 +4,9 @@ C:\Users\kedekfb\source\repos\GMS\GMS.Framework\obj\Debug\GMS.Framework.csprojRe
 C:\Users\kedekfb\source\repos\GMS\GMS.Framework\obj\Debug\GMS.Framework.csproj.CoreCompileInputs.cache
 C:\Users\kedekfb\source\repos\GMS\GMS.Framework\obj\Debug\GMS.Framework.dll
 C:\Users\kedekfb\source\repos\GMS\GMS.Framework\obj\Debug\GMS.Framework.pdb
+C:\zhstthly\APIMS\GMS.Framework\bin\Debug\GMS.Framework.dll
+C:\zhstthly\APIMS\GMS.Framework\bin\Debug\GMS.Framework.pdb
+C:\zhstthly\APIMS\GMS.Framework\obj\Debug\GMS.Framework.csprojAssemblyReference.cache
+C:\zhstthly\APIMS\GMS.Framework\obj\Debug\GMS.Framework.csproj.CoreCompileInputs.cache
+C:\zhstthly\APIMS\GMS.Framework\obj\Debug\GMS.Framework.dll
+C:\zhstthly\APIMS\GMS.Framework\obj\Debug\GMS.Framework.pdb

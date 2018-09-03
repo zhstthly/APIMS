@@ -35,6 +35,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\RuleSet\GMS.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -43,6 +44,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>
+    </CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -69,90 +72,13 @@
     <Compile Include="APIMS\Entities\APIItem.cs" />
     <Compile Include="APIMS\Entities\APIItemBase.cs" />
     <Compile Include="APIMS\Entities\APIType.cs" />
-    <Compile Include="APIMS\Entities\ClassProperties.cs" />
+    <Compile Include="APIMS\Entities\ClassProperty.cs" />
     <Compile Include="APIMS\Entities\CustomerClass.cs" />
     <Compile Include="APIMS\Entities\InputParameter.cs" />
     <Compile Include="APIMS\Entities\LoginInfo.cs" />
     <Compile Include="APIMS\Entities\Result.cs" />
     <Compile Include="BaseModel.cs" />
     <Compile Include="Infrastraucture\ObjExtend.cs" />
-    <Compile Include="Migrations\201802010758447_Initial.cs" />
-    <Compile Include="Migrations\201802010758447_Initial.Designer.cs">
-      <DependentUpon>201802010758447_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802220711365_Initial1.cs" />
-    <Compile Include="Migrations\201802220711365_Initial1.Designer.cs">
-      <DependentUpon>201802220711365_Initial1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802270232116_Initial2.cs" />
-    <Compile Include="Migrations\201802270232116_Initial2.Designer.cs">
-      <DependentUpon>201802270232116_Initial2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802270233236_Initial3.cs" />
-    <Compile Include="Migrations\201802270233236_Initial3.Designer.cs">
-      <DependentUpon>201802270233236_Initial3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802280956545_Initial4.cs" />
-    <Compile Include="Migrations\201802280956545_Initial4.Designer.cs">
-      <DependentUpon>201802280956545_Initial4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803010945296_Initial5.cs" />
-    <Compile Include="Migrations\201803010945296_Initial5.Designer.cs">
-      <DependentUpon>201803010945296_Initial5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803020547234_Initial6.cs" />
-    <Compile Include="Migrations\201803020547234_Initial6.Designer.cs">
-      <DependentUpon>201803020547234_Initial6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803020549399_Initial7.cs" />
-    <Compile Include="Migrations\201803020549399_Initial7.Designer.cs">
-      <DependentUpon>201803020549399_Initial7.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803020609597_Initial8.cs" />
-    <Compile Include="Migrations\201803020609597_Initial8.Designer.cs">
-      <DependentUpon>201803020609597_Initial8.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803020728527_Initial9.cs" />
-    <Compile Include="Migrations\201803020728527_Initial9.Designer.cs">
-      <DependentUpon>201803020728527_Initial9.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803020756446_Initial10.cs" />
-    <Compile Include="Migrations\201803020756446_Initial10.Designer.cs">
-      <DependentUpon>201803020756446_Initial10.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803021002503_Initial11.cs" />
-    <Compile Include="Migrations\201803021002503_Initial11.Designer.cs">
-      <DependentUpon>201803021002503_Initial11.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803060534250_Initial12.cs" />
-    <Compile Include="Migrations\201803060534250_Initial12.Designer.cs">
-      <DependentUpon>201803060534250_Initial12.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803060624013_Initial13.cs" />
-    <Compile Include="Migrations\201803060624013_Initial13.Designer.cs">
-      <DependentUpon>201803060624013_Initial13.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803070206031_Initial14.cs" />
-    <Compile Include="Migrations\201803070206031_Initial14.Designer.cs">
-      <DependentUpon>201803070206031_Initial14.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803070714371_Initial15.cs" />
-    <Compile Include="Migrations\201803070714371_Initial15.Designer.cs">
-      <DependentUpon>201803070714371_Initial15.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803070724047_Initial16.cs" />
-    <Compile Include="Migrations\201803070724047_Initial16.Designer.cs">
-      <DependentUpon>201803070724047_Initial16.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803080600372_Initial17.cs" />
-    <Compile Include="Migrations\201803080600372_Initial17.Designer.cs">
-      <DependentUpon>201803080600372_Initial17.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803080825265_Initial18.cs" />
-    <Compile Include="Migrations\201803080825265_Initial18.Designer.cs">
-      <DependentUpon>201803080825265_Initial18.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -172,63 +98,11 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802010758447_Initial.resx">
-      <DependentUpon>201802010758447_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802220711365_Initial1.resx">
-      <DependentUpon>201802220711365_Initial1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802270232116_Initial2.resx">
-      <DependentUpon>201802270232116_Initial2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802270233236_Initial3.resx">
-      <DependentUpon>201802270233236_Initial3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802280956545_Initial4.resx">
-      <DependentUpon>201802280956545_Initial4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803010945296_Initial5.resx">
-      <DependentUpon>201803010945296_Initial5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803020547234_Initial6.resx">
-      <DependentUpon>201803020547234_Initial6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803020549399_Initial7.resx">
-      <DependentUpon>201803020549399_Initial7.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803020609597_Initial8.resx">
-      <DependentUpon>201803020609597_Initial8.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803020728527_Initial9.resx">
-      <DependentUpon>201803020728527_Initial9.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803020756446_Initial10.resx">
-      <DependentUpon>201803020756446_Initial10.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803021002503_Initial11.resx">
-      <DependentUpon>201803021002503_Initial11.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803060534250_Initial12.resx">
-      <DependentUpon>201803060534250_Initial12.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803060624013_Initial13.resx">
-      <DependentUpon>201803060624013_Initial13.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803070206031_Initial14.resx">
-      <DependentUpon>201803070206031_Initial14.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803070714371_Initial15.resx">
-      <DependentUpon>201803070714371_Initial15.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803070724047_Initial16.resx">
-      <DependentUpon>201803070724047_Initial16.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803080600372_Initial17.resx">
-      <DependentUpon>201803080600372_Initial17.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803080825265_Initial18.resx">
-      <DependentUpon>201803080825265_Initial18.cs</DependentUpon>
-    </EmbeddedResource>
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

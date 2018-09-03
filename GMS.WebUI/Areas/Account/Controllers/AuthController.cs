@@ -1,10 +1,6 @@
-﻿using GMS.Domian.APIMS.Entities;
+﻿using System.Web.Mvc;
+using GMS.Domian.APIMS.Entities;
 using GMS.WebUI.Cache;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 
 namespace GMS.WebUI.Areas.Account.Controllers
 {
@@ -12,20 +8,25 @@ namespace GMS.WebUI.Areas.Account.Controllers
     {
         public ActionResult Login()
         {
-            return View(new LoginInfo());
+            return this.View(new LoginInfo());
         }
 
         [HttpPost]
         public ActionResult Login(LoginInfo info)
         {
-            if (!ModelState.IsValid)
-                return View();
-            if(UserCache.Login(info))
-                return RedirectToAction("Index", "Admin", new { Area = "APIMS" });
+            if (!this.ModelState.IsValid)
+            {
+                return this.View();
+            }
+
+            if (UserCache.Login(info))
+            {
+                return this.RedirectToAction("Index", "Admin", new { Area = "APIMS" });
+            }
             else
             {
-                ModelState.AddModelError("LoginError", "用户名或密码错误");
-                return View();
+                this.ModelState.AddModelError("LoginError", "用户名或密码错误");
+                return this.View();
             }
         }
     }

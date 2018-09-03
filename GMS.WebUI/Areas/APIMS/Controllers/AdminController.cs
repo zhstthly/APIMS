@@ -1,9 +1,5 @@
-﻿using GMS.WebUI.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using GMS.WebUI.Infrastructure;
 
 namespace GMS.WebUI.Areas.APIMS.Controllers
 {
@@ -12,12 +8,12 @@ namespace GMS.WebUI.Areas.APIMS.Controllers
         // GET: APIMS/Admin
         public ActionResult Index()
         {
-            return View();
+            return this.View();
         }
 
         public ActionResult TopNavbar()
         {
-            return PartialView("_Navbar");
+            return this.PartialView("_Navbar");
         }
     }
 }

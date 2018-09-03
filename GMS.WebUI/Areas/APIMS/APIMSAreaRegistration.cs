@@ -2,17 +2,17 @@
 
 namespace GMS.WebUI.Areas.APIMS
 {
-    public class APIMSAreaRegistration : AreaRegistration 
+    public class APIMSAreaRegistration : AreaRegistration
     {
-        public override string AreaName 
+        public override string AreaName
         {
-            get 
+            get
             {
                 return "APIMS";
             }
         }
 
-        public override void RegisterArea(AreaRegistrationContext context) 
+        public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
                 "APIMS_default",

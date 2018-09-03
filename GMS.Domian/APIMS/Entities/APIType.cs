@@ -14,6 +14,7 @@ namespace GMS.Domian.APIMS.Entities
     {
         [Display(Name = "属性名")]
         public string Name { get; set; }
+
         [Display(Name = "颜色")]
         public string Color { get; set; }
     }

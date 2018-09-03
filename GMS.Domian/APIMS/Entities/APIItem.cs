@@ -12,14 +12,17 @@ namespace GMS.Domian.APIMS.Entities
     /// </summary>
     public class APIItem : APIItemBase
     {
-        [Display(Name = "例子")]
-        public string Demo { get; set; }
-        public ICollection<InputParameter> InputParameters { get; set; }
-        public Result Result { get; set; }
         public APIItem()
         {
-            Result = new Result();
-            InputParameters = new List<InputParameter>();
+            this.Result = new Result();
+            this.InputParameters = new List<InputParameter>();
         }
+
+        [Display(Name = "例子")]
+        public string Demo { get; set; }
+
+        public ICollection<InputParameter> InputParameters { get; set; }
+
+        public Result Result { get; set; }
     }
 }

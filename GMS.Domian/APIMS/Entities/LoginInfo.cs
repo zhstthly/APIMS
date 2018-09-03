@@ -11,6 +11,7 @@ namespace GMS.Domian.APIMS.Entities
     {
         [Required(ErrorMessage = "请输入管理员账号")]
         public string UserName { get; set; }
+
         [Required(ErrorMessage = "请输入管理员密码")]
         public string Password { get; set; }
     }

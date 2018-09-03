@@ -1,8 +1,5 @@
-﻿using GMS.Domian.APIMS.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
+using GMS.Domian.APIMS.Entities;
 
 namespace GMS.WebUI.Cache
 {
@@ -15,8 +12,10 @@ namespace GMS.WebUI.Cache
                 SetAdminCache("LoginInfo", loginInfo);
                 return true;
             }
+
             return false;
         }
+
         public static object GetAdminCache(string name)
         {
             return HttpRuntime.Cache.Get(name);
@@ -25,10 +24,12 @@ namespace GMS.WebUI.Cache
         private static void RemoveAdminCache(string name)
         {
             if (HttpRuntime.Cache[name] != null)
+            {
                 HttpRuntime.Cache.Remove(name);
+            }
         }
 
-        private static void SetAdminCache(string name,object value)
+        private static void SetAdminCache(string name, object value)
         {
             HttpRuntime.Cache.Insert(name, value);
         }

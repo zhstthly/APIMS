@@ -4,3 +4,9 @@ C:\Users\kedekfb\source\repos\GMS\GMS.Core\obj\Debug\GMS.Core.csprojResolveAssem
 C:\Users\kedekfb\source\repos\GMS\GMS.Core\obj\Debug\GMS.Core.csproj.CoreCompileInputs.cache
 C:\Users\kedekfb\source\repos\GMS\GMS.Core\obj\Debug\GMS.Core.dll
 C:\Users\kedekfb\source\repos\GMS\GMS.Core\obj\Debug\GMS.Core.pdb
+C:\zhstthly\APIMS\GMS.Core\bin\Debug\GMS.Core.dll
+C:\zhstthly\APIMS\GMS.Core\bin\Debug\GMS.Core.pdb
+C:\zhstthly\APIMS\GMS.Core\obj\Debug\GMS.Core.csprojAssemblyReference.cache
+C:\zhstthly\APIMS\GMS.Core\obj\Debug\GMS.Core.csproj.CoreCompileInputs.cache
+C:\zhstthly\APIMS\GMS.Core\obj\Debug\GMS.Core.dll
+C:\zhstthly\APIMS\GMS.Core\obj\Debug\GMS.Core.pdb

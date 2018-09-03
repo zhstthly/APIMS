@@ -1,18 +1,17 @@
-﻿using GMS.Domian.APIMS.Abstract;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
+using GMS.Domian.APIMS.Abstract;
 using GMS.Domian.APIMS.Entities;
 using GMS.WebUI.Infrastructure;
 using GMS.WebUI.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 
 namespace GMS.WebUI.Areas.APIMS.Controllers
 {
     public class AdminCustomerClassController : AdminControllerBase
     {
-        private IAPIMSRepository repository;
+        private readonly IAPIMSRepository repository;
+
         public AdminCustomerClassController(IAPIMSRepository repository)
         {
             this.repository = repository;
@@ -20,139 +19,155 @@ namespace GMS.WebUI.Areas.APIMS.Controllers
 
         public ActionResult ClassMaster()
         {
-            return View();
+            return this.View();
         }
 
         public ActionResult CustomerClass(int classificationId)
         {
-            var customerClasses = repository.GetAllCustomerClassesByClassificationID(classificationId, false).ToList();
-            ViewData["classificationID"] = classificationId;
-            return View(customerClasses);
+            var customerClasses = this.repository.GetAllCustomerClassesByClassificationID(classificationId, false).ToList();
+            this.ViewData["classificationID"] = classificationId;
+            return this.View(customerClasses);
         }
 
         [HttpPost]
         public JsonResult AddCustomerClass(int classificationID)
         {
             AjaxResult ar = new AjaxResult();
-            var newItem = repository.AddCustomerClass(new CustomerClass(), classificationID);
-            newItem.Name = newItem.Name ?? "";
-            newItem.Description = newItem.Description ?? "";
+            var newItem = this.repository.AddCustomerClass(new CustomerClass(), classificationID);
+            newItem.Name = newItem.Name ?? string.Empty;
+            newItem.Description = newItem.Description ?? string.Empty;
             ar.IsSuccess = true;
             ar.Message = "新增成功！";
             ar.Data = newItem;
-            return Json(ar);
+            return this.Json(ar);
         }
 
         [HttpPost]
         public JsonResult SaveCustomerClass(CustomerClass customerClass)
         {
             AjaxResult ar = new AjaxResult();
-            repository.SaveCustomerClass(customerClass);
+            this.repository.SaveCustomerClass(customerClass);
             ar.IsSuccess = true;
             ar.Message = "保存成功！";
-            return Json(ar);
+            return this.Json(ar);
         }
 
         [HttpPost]
         public JsonResult DeleteCustomerClass(int customerClassID)
         {
             AjaxResult ar = new AjaxResult();
-            repository.DeleteCustomerClass(customerClassID);
+            this.repository.DeleteCustomerClass(customerClassID);
             ar.IsSuccess = true;
             ar.Message = "删除成功！";
-            return Json(ar);
+            return this.Json(ar);
         }
 
         [HttpPost]
         public JsonResult SetCommonCustomerClass(int customerClassID)
         {
             AjaxResult ar = new AjaxResult();
-            repository.SetCommonCustomerClass(customerClassID);
+            this.repository.SetCommonCustomerClass(customerClassID);
             ar.IsSuccess = true;
             ar.Message = "设置成功！";
-            return Json(ar);
+            return this.Json(ar);
         }
 
         public ActionResult ClassProperty(int id)
         {
-            var customerClass = repository.GetCustomerClassByID(id);
-            return View(customerClass);
+            var customerClass = this.repository.GetCustomerClassByID(id);
+            return this.View(customerClass);
         }
 
         [NonAction]
-        public Dictionary<int,string> GetCommonClassTypes()
+        public Dictionary<int, string> GetCommonClassTypes()
         {
-            var commonClassTypes = repository.GetCommonClassTypes();
+            var commonClassTypes = this.repository.GetCommonClassTypes();
             Dictionary<int, string> dic_CommonClassType = new Dictionary<int, string>();
-            foreach(var item in commonClassTypes)
+            foreach (var item in commonClassTypes)
             {
                 dic_CommonClassType.Add(item.ID, item.Name);
             }
+
             return dic_CommonClassType;
         }
 
         [NonAction]
         public string GetTypeNameByID(int id)
         {
-            var findItem = repository.GetClassTypeByID(id);
+            var findItem = this.repository.GetClassTypeByID(id);
             if (findItem == null)
+            {
                 return "null";
+            }
             else
+            {
                 return findItem.Name;
+            }
         }
 
         [NonAction]
         public int GetClassPropertiesCountByClassTypeID(int id)
         {
-            var findItem = repository.GetClassTypeByID(id);
+            var findItem = this.repository.GetClassTypeByID(id);
             if (findItem == null)
+            {
                 return 0;
+            }
             else
+            {
                 return findItem.Properties.Count;
+            }
         }
 
         [NonAction]
         public IList<CustomerClass> GetRelevantTypes(int classificationID)
         {
-            return repository.GetAllCustomerClassesByClassificationID(classificationID,true).ToList();
+            return this.repository.GetAllCustomerClassesByClassificationID(classificationID, true).ToList();
         }
 
-
-        //自定义组件的ajax操作
+        /// <summary>
+        /// 自定义组件的ajax操作
+        /// </summary>
+        /// <param name="customerClassID">分类ID</param>
+        /// <returns>获取自定义分类json</returns>
         public JsonResult GetClassProperties(int? customerClassID)
         {
-            return Json(repository.GetCustomerClassByID((int)customerClassID).Properties.ToList().OrderBy(p => p.ID), JsonRequestBehavior.AllowGet);
+            return this.Json(this.repository.GetCustomerClassByID((int)customerClassID).Properties.ToList().OrderBy(p => p.ID), JsonRequestBehavior.AllowGet);
         }
+
         public JsonResult AddClassProperty(int? customerClassID)
         {
-            repository.AddClassProperty(new ClassProperty(), (int)customerClassID);
-            return GetClassProperties(customerClassID);
+            this.repository.AddClassProperty(new ClassProperty(), (int)customerClassID);
+            return this.GetClassProperties(customerClassID);
         }
+
         public JsonResult EditClassProperty(ClassProperty item)
         {
             var ajaxResult = new AjaxResult { };
-            repository.SaveClassProperty(item);
+            this.repository.SaveClassProperty(item);
             ajaxResult.IsSuccess = true;
             ajaxResult.Message = "编辑成功！";
-            return Json(ajaxResult);
+            return this.Json(ajaxResult);
         }
+
         public JsonResult DeleteClassProperty(int[] ids)
         {
             foreach (int id in ids)
             {
-                repository.DeleteClassProperty(id);
+                this.repository.DeleteClassProperty(id);
             }
+
             var ajaxResult = new AjaxResult
             {
                 IsSuccess = true,
                 Message = "删除成功！"
             };
-            return Json(ajaxResult);
+            return this.Json(ajaxResult);
         }
 
         public JsonResult GetRelevantTypesByAjax(int classificationID)
         {
-            var types = GetRelevantTypes(classificationID);
+            var types = this.GetRelevantTypes(classificationID);
             List<BseSelect> bseList = new List<BseSelect>();
             foreach (var item in types)
             {
@@ -162,7 +177,8 @@ namespace GMS.WebUI.Areas.APIMS.Controllers
                     text = item.Name
                 });
             }
-            return Json(bseList, JsonRequestBehavior.AllowGet);
+
+            return this.Json(bseList, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -1,10 +1,6 @@
-﻿using GMS.Domian.APIMS.Entities;
+﻿using System.Web.Mvc;
+using GMS.Domian.APIMS.Entities;
 using GMS.WebUI.Cache;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 
 namespace GMS.WebUI.Infrastructure
 {
@@ -17,12 +13,13 @@ namespace GMS.WebUI.Infrastructure
                 return UserCache.GetAdminCache("LoginInfo") as LoginInfo;
             }
         }
+
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             base.OnActionExecuting(filterContext);
-            if (LoginInfo == null)
+            if (this.LoginInfo == null)
             {
-                filterContext.Result = RedirectToAction("Login", "Auth", new { Area = "Account" });
+                filterContext.Result = this.RedirectToAction("Login", "Auth", new { Area = "Account" });
             }
         }
 

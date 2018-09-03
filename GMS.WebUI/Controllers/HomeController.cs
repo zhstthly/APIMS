@@ -11,7 +11,7 @@ namespace GMS.WebUI.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return RedirectToAction("Index", "CustomerAPIItem", new { Area = "APIMS" });
+            return this.RedirectToAction("Index", "CustomerAPIItem", new { Area = "APIMS" });
         }
     }
 }

@@ -1,36 +1,35 @@
-﻿using GMS.Domian.APIMS.Abstract;
+﻿using System;
+using System.Collections.Generic;
+using System.Web.Mvc;
+using GMS.Domian.APIMS.Abstract;
 using GMS.Domian.APIMS.Concrete;
 using Ninject;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 
 namespace GMS.WebUI.Infrastructure
 {
-    public class NinjectDependencyResolver:IDependencyResolver
+    public class NinjectDependencyResolver : IDependencyResolver
     {
-        private IKernel kernel;
+        private readonly IKernel kernel;
+
         public NinjectDependencyResolver(IKernel kernel)
         {
             this.kernel = kernel;
-            AddBindings();
+            this.AddBindings();
         }
 
         public object GetService(Type serviceType)
         {
-            return kernel.TryGet(serviceType);
+            return this.kernel.TryGet(serviceType);
         }
 
         public IEnumerable<object> GetServices(Type serviceType)
         {
-            return kernel.GetAll(serviceType);
+            return this.kernel.GetAll(serviceType);
         }
 
         private void AddBindings()
         {
-            kernel.Bind<IAPIMSRepository>().To<EFAPIMSRepository>();
+            this.kernel.Bind<IAPIMSRepository>().To<EFAPIMSRepository>();
         }
     }
 }
