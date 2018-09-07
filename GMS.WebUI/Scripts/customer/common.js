@@ -27,7 +27,7 @@ Date.prototype.format = function (fmt) {
     }
     for (var k in o) {
         if (new RegExp("(" + k + ")").test(fmt)) {
-            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) :
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) :
                 (("00" + o[k]).substr(("" + o[k]).length)));
         }
     }
@@ -39,11 +39,12 @@ ShowMessage = function (message, life) {
     if (life) {
         time = life;
     }
+    var msg = "";
     if ($("#tip_message").text().length > 0) {
-        var msg = "<span>" + message + "</span>";
+        msg = "<span>" + message + "</span>";
         $("#tip_message").empty().append(msg);
     } else {
-        var msg = "<p id='tip_message'><span>" + message + "</span></p>";
+        msg = "<p id='tip_message'><span>" + message + "</span></p>";
         $("body").append(msg);
     }
     $("#tip_message").show();
@@ -141,7 +142,7 @@ function tableTrClick($sender) {
     }
     //列初始化
     function createCols(initParams) {
-        if (initParams.params.length != initParams.titles.length)
+        if (initParams.params.length !== initParams.titles.length)
             return null;
         var arr = [];
         if (initParams.hasCheckbox) {
@@ -202,15 +203,15 @@ function tableTrClick($sender) {
         var s = selectFormatArray;
         for (var i = 0; i < selectFormatArray.length;i++) {
             var f = selectFormatArray[i].field;
-            var b = selectFormatArray[i].field == field;
-            if (selectFormatArray[i].field == field) {
+            var b = selectFormatArray[i].field === field;
+            if (selectFormatArray[i].field === field) {
                 findArray = selectFormatArray[i].formatArray;
                 break;
             }
         }
         if (findArray) {
             for (var j = 0; j < findArray.length;j++) {
-                if (findArray[j].value == value) {
+                if (findArray[j].value === value) {
                     return findArray[j].text;
                 }
             }

@@ -24,6 +24,7 @@ namespace GMS.Domian.Infrastraucture
             foreach (var property in properties)
             {
                 if (!(property.PropertyType == typeof(string)
+                    || property.PropertyType == typeof(int)
                     || property.PropertyType == typeof(short)
                     || property.PropertyType == typeof(bool)
                     || property.PropertyType == typeof(byte)

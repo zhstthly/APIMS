@@ -4,13 +4,12 @@ using System.Web.Mvc;
 using GMS.Domian.APIMS.Abstract;
 using GMS.Domian.APIMS.Entities;
 using GMS.WebUI.Infrastructure;
-using GMS.WebUI.Models;
 
 namespace GMS.WebUI.Areas.APIMS.Controllers
 {
     public class AdminAPITypeController : AdminControllerBase
     {
-        private IAPIMSRepository repository;
+        private readonly IAPIMSRepository repository;
 
         public AdminAPITypeController(IAPIMSRepository repository)
         {
@@ -54,17 +53,12 @@ namespace GMS.WebUI.Areas.APIMS.Controllers
         public JsonResult GetAllTypesByAjax()
         {
             var types = this.repository.GetAPITypes();
-            List<BseSelect> bseList = new List<BseSelect>();
-            foreach (var item in types)
+            var typeList = types.Select(type => new
             {
-                bseList.Add(new BseSelect
-                {
-                    value = item.ID,
-                    text = item.Name
-                });
-            }
-
-            return this.Json(bseList, JsonRequestBehavior.AllowGet);
+                value = type.ID,
+                text = type.Name
+            });
+            return this.Json(typeList, JsonRequestBehavior.AllowGet);
         }
     }
 }

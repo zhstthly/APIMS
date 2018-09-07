@@ -150,9 +150,10 @@
     <Content Include="Scripts\bootstrapExtends\bootstrap-editable.js" />
     <Content Include="Scripts\bootstrapExtends\bootstrap-table-editable.js" />
     <Content Include="Scripts\bootstrapExtends\bootstrap-table.js" />
-    <Content Include="Scripts\Common.js" />
-    <Content Include="Scripts\cutomer\bootstrap-colorpicker.js" />
-    <Content Include="Scripts\cutomer\bootstrap-colorpicker.min.js" />
+    <Content Include="Scripts\customer\common.js" />
+    <Content Include="Scripts\bootstrap-colorpicker.js" />
+    <Content Include="Scripts\bootstrap-colorpicker.min.js" />
+    <Content Include="Scripts\customer\ztreeHelper.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -249,7 +250,6 @@
     <Compile Include="Infrastructure\MyConfigHandler.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\AjaxResult.cs" />
-    <Compile Include="Models\BseSelect.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

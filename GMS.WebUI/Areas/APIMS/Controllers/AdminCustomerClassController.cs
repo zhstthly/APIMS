@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Configuration;
 using System.Linq;
 using System.Web.Mvc;
 using GMS.Domian.APIMS.Abstract;
 using GMS.Domian.APIMS.Entities;
+using GMS.WebUI.Cache;
 using GMS.WebUI.Infrastructure;
 using GMS.WebUI.Models;
 
@@ -168,17 +171,17 @@ namespace GMS.WebUI.Areas.APIMS.Controllers
         public JsonResult GetRelevantTypesByAjax(int classificationID)
         {
             var types = this.GetRelevantTypes(classificationID);
-            List<BseSelect> bseList = new List<BseSelect>();
-            foreach (var item in types)
+            var typeList = types.Select(type => new
             {
-                bseList.Add(new BseSelect
-                {
-                    value = item.ID,
-                    text = item.Name
-                });
-            }
+                value = type.ID,
+                text = type.Name
+            });
+            return this.Json(typeList, JsonRequestBehavior.AllowGet);
+        }
 
-            return this.Json(bseList, JsonRequestBehavior.AllowGet);
+        public string GetSystems()
+        {
+            return string.Join(",", ConfigCache.GetSystems().Values);
         }
     }
 }

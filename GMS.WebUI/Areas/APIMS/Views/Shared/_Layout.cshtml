@@ -8,10 +8,15 @@
     <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrapExtends/bootstrap-editable.css" rel="stylesheet" />
     <link href="~/Content/bootstrapExtends/bootstrap-table.css" rel="stylesheet" />
-    <script src="~/Scripts/modernizr-2.6.2.js"></script>
     <link href="~/Content/bootstrap-colorpicker.css" rel="stylesheet" />
     <link href="~/Content/zTree.theme.metro.css" rel="stylesheet" />
-
+</head>
+<body>
+    <div class="container body-content">
+        @Html.Action("TopNavbar", "Admin", new { Area = "APIMS" })
+        @RenderBody()
+    </div>
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
@@ -20,15 +25,10 @@
     <script src="~/Scripts/bootstrapExtends/bootstrap-table-zh-CN.min.js"></script>
     <script src="~/Scripts/bootstrapExtends/bootstrap-table-editable.js"></script>
     <script src="~/Scripts/bootstrapExtends/bootstrap-editable.js"></script>
-    <script src="~/Scripts/cutomer/bootstrap-colorpicker.js"></script>
+    <script src="~/Scripts/bootstrap-colorpicker.js"></script>
     <script src="~/Scripts/jquery.ztree.all-3.5.js"></script>
-</head>
-<body>
-    <div class="container body-content">
-        @Html.Action("TopNavbar", "Admin", new { Area = "APIMS" })
-        @RenderBody()
-    </div>
-    <script src="~/Scripts/Common.js"></script>
-    @RenderSection("PageJS",required:false)
+    <script src="~/Scripts/customer/ztreeHelper.js"></script>
+    <script src="~/Scripts/customer/common.js"></script>
+    @RenderSection("PageJS", required: false)
 </body>
 </html>

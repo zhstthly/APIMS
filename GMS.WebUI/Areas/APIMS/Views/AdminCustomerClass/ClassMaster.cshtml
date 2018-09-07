@@ -9,7 +9,7 @@
             selectApiClassificationID = id;
             var data = { classificationId: id };
             var action = '@Url.Action("CustomerClass")';
-            var replaceID = '#cutomerClass';
+            var replaceID = '#customerClass';
             LoadAjax(replaceID, action, data);
         }
 }
@@ -20,6 +20,6 @@
     <div class="panel-heading">
         <h2 id="classificationName"></h2>
     </div>
-    <div id="cutomerClass" class="panel-body">
+    <div id="customerClass" class="panel-body">
     </div>
 </div>
